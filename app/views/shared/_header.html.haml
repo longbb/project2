@@ -1,0 +1,25 @@
+%header.navbar.navbar-fixed-top.navbar-inverse
+  .container
+    .nav
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Home", '#'
+        %li= link_to "Help", '#'
+        - if logged_in?
+          %li= link_to "Members", '#'
+          %li.dropdown.presentation
+            %a#statistics.dropdown-toggle{ "aria-expanded": "false",
+              "aria-haspopup": "true", "data-toggle": "dropdown",
+              "data-target": "#", role: "button" }
+              Account
+              %span.caret
+            %ul.dropdown-menu{ "aria-labelledby": "accounts" }
+              %li
+                %a{ href: "#" } Profile
+              %li
+                %a{ href: "#" } Settings
+              %li.divider
+              %li
+                = link_to "Log out", logout_path, method: "delete"
+        - else
+          %li= link_to "Log in", login_path
+          %li= link_to "Sign up", new_member_path
