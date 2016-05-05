@@ -1,0 +1,22 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h1 New Post
+    .panel-body
+      = form_for @post do |f|
+        = render "shared/error_messages", object: f.object
+        .form-group
+          = f.label :topic
+          .form-control
+            = f.select(:topic_id) do
+              - @topics.each do |topic|
+                = content_tag(:option, topic.name, value: topic.id)
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: "form-control"
+        .form-group
+          = f.label :content
+          = f.text_area :content, class: "tinymce"
+          = tinymce
+        .button
+          = f.submit "Post", class: "btn btn-primary"

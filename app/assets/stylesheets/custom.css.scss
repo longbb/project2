@@ -5,6 +5,8 @@
 
 body {
   padding-top: 100px;
+  background-color: #e2e2e2;
+  color: #292f33;
 }
 
 section {
@@ -21,6 +23,10 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+}
+
+p.alignRight {
+  text-align: right;
 }
 
 /* header */
