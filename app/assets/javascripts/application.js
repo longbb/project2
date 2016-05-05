@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require avatars_for_rails
 //= require_tree .
 //= require bootstrap
 //= require tinymce
+//= require avatars_for_rails
