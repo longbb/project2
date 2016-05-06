@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317072713) do
+ActiveRecord::Schema.define(version: 20160506082358) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -30,9 +30,13 @@ ActiveRecord::Schema.define(version: 20160317072713) do
     t.string   "password_digest"
     t.string   "activation_digest"
     t.string   "status"
-    t.string   "type"
+    t.string   "role"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -42,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160317072713) do
     t.integer  "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "status"
   end
 
   add_index "posts", ["member_id"], name: "index_posts_on_member_id"

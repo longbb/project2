@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if member && member.authenticate(params[:session][:password])
       log_in member
       redirect_to member
+      flash[:success] = "Login successfully!"
     else
       flash[:danger] = "Invalid email/password combination"
       render "new"

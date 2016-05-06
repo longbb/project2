@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index]
   end
 
-  resources :posts, only: [:show, :new, :create, :edit, :update]
+  resources :posts, only: [:show, :new, :create, :edit, :update, :destroy]
 
   root "sessions#new"
 end

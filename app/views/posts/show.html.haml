@@ -1,0 +1,21 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      = @post.created_at
+    .panel-body
+      .table-responsive
+      %table.table.table-striped.table-hover
+        %td{ width: 80 }
+          %center
+            = gravatar_for @post.member
+            %br
+            = @post.member.name
+        %td
+          %h2
+            = @post.title
+          %br
+          = @post.content.html_safe
+  - if current_member == @post.member && @post.status == "open"
+    = link_to "Edit", edit_post_path(@post.id), method: :get, class: "btn btn-success"
+  - if current_member.role == "admin" && @post.status == "open"
+    = link_to "Close", @post, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"

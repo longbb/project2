@@ -1,0 +1,16 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h1 Edit Post
+    .panel-body
+      = form_for @post do |f|
+        = render "shared/error_messages", object: f.object
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: "form-control"
+        .form-group
+          = f.label :content
+          = f.text_area :content, class: "tinymce"
+          = tinymce
+        .button
+          = f.submit "Edit", class: "btn btn-primary"
