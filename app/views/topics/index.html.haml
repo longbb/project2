@@ -1,0 +1,49 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %img{ src: asset_path("home.png"), width: "20px", height: "20px" }
+      = link_to "Home", root_path, { style: "color:#FFFFFF" }
+    .panel-body
+      .table-responsive
+      %table.table.table-striped.table-hover
+        %thead
+          %th
+          %th
+            %center
+              Topic
+          %th
+          %th
+            %center
+              New Threads / Posts
+        %tbody
+          - @topics.each do |topic|
+            %tr
+              %td{ width: "10%" }
+                - if topic.name == "C++"
+                  %img{ src: asset_path("Cpp.png"), width: "100%" }
+                - elsif topic.name == "C#"
+                  %img{ src: asset_path("Csharp.png"), width: "100%" }
+                - elsif topic.name == ".NET"
+                  %img{ src: asset_path("NET.png"), width: "100%" }
+                - else
+                  %img{ src: asset_path(topic.name + ".png"), width: "100%" }
+              %td{ width: "50%" }
+                .title
+                  %p
+                    = link_to topic.name, topic_path(topic.id)
+                %br
+                = topic.description
+              %td{ width: "10%" }
+                - number_posts = topic.posts.length
+                Number posts of Topic:
+                = number_posts
+              %td{ width: "30%" }
+                - last_post = topic.posts.order(last_comment_at: :desc).first
+                - if last_post.present?
+                  %img{ src: asset_path("post.png"), width: "20px", height: "20px" }
+                  = link_to last_post.title, post_path(last_post.id)
+                  %br
+                  = "by "
+                  = link_to last_post.member.name, member_path(last_post.member.id)
+                  %br
+                  = last_post.created_at

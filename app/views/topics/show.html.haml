@@ -1,0 +1,66 @@
+.container
+  %p.alignRight
+    - if current_member.present? 
+      = link_to "New", new_post_path(), method: :get, class: "btn btn-success"
+  .panel.panel-primary
+    .panel-heading
+      %img{ src: asset_path("home.png"), width: "20px", height: "20px" }
+      = link_to "Home", root_path, { style: "color:#FFFFFF" }
+      = " > "
+      = link_to @topic.name, topic_path(@topic.id), { style: "color:#FFFFFF" }
+    .panel-body
+      - if @posts.length == 0
+        %h2
+          This topic don't have any post. Create 
+          = link_to "New", new_post_path
+      - else
+        .table-responsive
+        %table.table.table-striped.table-hover
+          %thead
+            %th
+            %th
+              %center
+                Threads / Posts
+            %th
+              %center
+                Comments
+            %th
+              %center
+                Last Activity
+          %tbody
+            - @posts.each do |post|
+              %tr
+                %td{ width: "10%" }
+                  - if post.status == "closed"
+                    %img{ src: asset_path("close.png"), width: "50px", height: "50px" }
+                  - else
+                    %img{ src: asset_path("open.png"), width: "50px", height: "50px" }
+                %td{ width: "50%"}
+                  .content
+                    %p
+                      = link_to post.title, post_path(post.id)
+                    = "by "
+                    = link_to post.member.name, member_path(post.member.id)
+                    = " at "
+                    = post.created_at
+                %td{ width: "10%"}
+                  Comments: 
+                  = post.comments.length
+                  %br
+                  Views:
+                  = post.number_views
+                  %br
+                  Status: 
+                  = post.status
+                %td{ width: "30%" }
+                  - if post.last_comment_id.present?
+                    - last_comment = Comment.find_by(id: post.last_comment_id)
+                    - if last_comment.present?
+                      = link_to last_comment.member.name, member_path(last_comment.member.id)
+                      %br
+                      = post.last_comment_at
+                  - else
+                    = link_to post.member.name, member_path(post.member.id)
+                    %br
+                    = post.last_comment_at
+        = will_paginate @posts

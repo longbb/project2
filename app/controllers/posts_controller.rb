@@ -15,6 +15,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     if @post.present?
       @comments = @post.comments.paginate(page: params[:page])
+      @post.update_attribute(:number_views, @post.number_views+1)
     else
       redirect_to root_path
       flash[:danger] = "The post doesn't exist"
@@ -30,8 +31,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     @post.status = "open"
+    @post.number_views = 0
     if @post.save
       redirect_to post_path(@post.id)
+      @post.update_attribute(:last_comment_at, @post.created_at)
       flash[:success] = "Success"
     else
       render "new"

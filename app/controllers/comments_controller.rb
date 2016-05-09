@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
           member_id: current_member.id
         )
         if @comment.save
+          @post.update_attributes(last_comment_at: @comment.created_at, last_comment_id: @comment.id)
           redirect_to @post
           flash[:success] = "Successfully!"
         else

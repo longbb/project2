@@ -1,12 +1,23 @@
 .container
   %p.alignRight
-    - if current_member == @post.member && @post.status == "open"
-      = link_to "Edit", edit_post_path(@post.id), method: :get, class: "btn btn-success"
-    - if current_member.role == "admin" && @post.status == "open"
-      = link_to "Close", @post, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
+    - if current_member.present? 
+      - if current_member == @post.member && @post.status == "open"
+        = link_to "Edit", edit_post_path(@post.id), method: :get, class: "btn btn-success"
+      - if current_member.role == "admin" && @post.status == "open"
+        = link_to "Close", @post, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
   .panel.panel-primary
     .panel-heading
-      = @post.created_at
+      .row
+        .col-xs-12.col-md-8
+          %img{ src: asset_path("home.png"), width: "20px", height: "20px" }
+          = link_to "Home", root_path, { style: "color:#FFFFFF" }
+          = " > "
+          = link_to @post.topic.name, topic_path(@post.topic.id), { style: "color:#FFFFFF" }
+          = " > "
+          = link_to @post.title, post_path(@post.id), { style: "color:#FFFFFF" }
+        .col-xs-6.col-md-4
+          %p.alignRight
+            = @post.created_at
     .panel-body
       .table-responsive
       %table.table.table-striped.table-hover
@@ -36,7 +47,7 @@
               %td
                 = comment.content.html_safe
     = will_paginate @comments
-  - if @post.status == "open"
+  - if @post.status == "open" && current_member.present?
     = form_tag({ controller: "comments", action: "create" }, method: "post") do
       = hidden_field_tag(:post_id, @post.id)
       .form-group
