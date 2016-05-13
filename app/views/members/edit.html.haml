@@ -1,3 +1,29 @@
-= form_for @member do |form|
-  = form.file_field :avatar
-  = form.submit "Sign Up"
+.container
+  .col-md-4.col-md-offset-4
+    .panel.panel-primary
+      .panel-heading
+        %center
+          %h1 Update profile
+      .panel-body
+        = form_for @member do |f|
+          = render "shared/error_messages", object: f.object
+          .form-group
+            = f.label :email
+            %br
+            = f.text_field :email, class: "form-control"
+          .form-group
+            = f.label :name
+            %br
+            = f.text_field  :name, class: "form-control"
+          .form-group
+            = f.label :password
+            %br
+            = f.password_field :password, class: "form-control"
+          .form-group
+            = f.label :password_confirmation
+            %br
+            = f.password_field :password_confirmation, class: "form-control"
+          .form-gruop
+            = f.file_field :avatar, class: "form-control"
+          .button
+            = f.submit "Update your profile", class: "btn btn-primary"

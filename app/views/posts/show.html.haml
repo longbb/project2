@@ -21,11 +21,14 @@
     .panel-body
       .table-responsive
       %table.table.table-striped.table-hover
-        %td{ width: 80 }
+        %td{ width: "100px" }
           %center
-            = gravatar_for @post.member
+            - if @post.member.avatar.url == "/images/original/missing.png"
+              %img{ src: asset_path("default_user.png"), width: "100px", height: "100px" }
+            - else
+              = image_tag @post.member.avatar.url(:thumb)
             %br
-            = @post.member.name
+            = link_to @post.member.name, @post.member
         %td
           %h2
             = @post.title
@@ -35,15 +38,18 @@
     - @comments.each do |comment|
       .panel.panel-primary
         .panel-heading
-          = @post.created_at
+          = comment.created_at
         .panel-body
           .table-responsive
             %table.table.table-striped.table-hover
-              %td{ width: 80 }
+              %td{ width: "100px" }
                 %center
-                  = gravatar_for comment.member
+                  - if comment.member.avatar.url == "/images/original/missing.png"
+                    %img{ src: asset_path("default_user.png"), width: "100px", height: "100px" }
+                  - else
+                    = image_tag comment.member.avatar.url(:thumb)
                   %br
-                  = comment.member.name
+                  = link_to comment.member.name, comment.member
               %td
                 = comment.content.html_safe
     = will_paginate @comments

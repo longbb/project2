@@ -1,3 +1,11 @@
-// Place all the styles related to the Members controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.show-text {
+  text-align: left;
+  margin-left: 50px;
+  span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .button {
+    margin-top: 110px;
+  }
+}

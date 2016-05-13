@@ -1,9 +1,35 @@
-.row
-  %aside.col-md-4
-    %section.member_info
-      %h1
-        - if @member.avatar.url == "/images/original/missing.png"
-          %img{ src: asset_path("default_user.png"), width: "100px", height: "100px" }
-        - else
-          = image_tag @member.avatar.url(:thumb)
+.container
+  .row
+    %h1
+      %center
+        Member Information
+    .col-md-3
+      - if @member.avatar.url == "/images/original/missing.png"
+        %img{ src: asset_path("default_user.png"), width: "100px", height: "100px" }
+      - else
+        = image_tag @member.avatar.url(:medium)
+    .col-md-6
+      .show-text
+        %span
+          Name:
         = @member.name
+        %br
+        %span
+          Email:
+        = @member.email
+        %br
+        %span
+          Joined at:
+        = @member.created_at.to_date
+        %br
+        %span
+          Number of posts:
+        = @number_posts
+        %br
+        %span
+          Number of comments:
+        = @number_comments
+        %br
+        - if logged_in? && current_member.id == @member.id
+          .button
+            = link_to "Edit your profile", edit_member_path(@member.id), method: :get, class: "btn btn-success"
