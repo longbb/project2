@@ -2,5 +2,8 @@
   %aside.col-md-4
     %section.member_info
       %h1
-        = gravatar_for @member
+        - if @member.avatar.url == "/images/original/missing.png"
+          %img{ src: asset_path("default_user.png"), width: "100px", height: "100px" }
+        - else
+          = image_tag @member.avatar.url(:thumb)
         = @member.name
