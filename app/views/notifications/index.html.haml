@@ -1,0 +1,22 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h1
+        = current_member.name + "'s Notifications"
+    .panel-body
+      - if @notifications.empty?
+        %h3
+          Wow! You have seen all notifications
+      - else
+        .table-responsive
+        %table.table.table-striped.table-hover
+          %tbody
+            - @notifications.each do |notification|
+              %tr
+                %td
+                  = notification.content
+                  %br
+                  = link_to notification.post.title, notification.post 
+                  %br
+                  at
+                  = notification.created_at

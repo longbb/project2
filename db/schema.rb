@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509123532) do
+ActiveRecord::Schema.define(version: 20160513040514) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -41,7 +41,18 @@ ActiveRecord::Schema.define(version: 20160509123532) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "notification"
   end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "content"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notifications", ["post_id"], name: "index_notifications_on_post_id"
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"

@@ -14,6 +14,14 @@ class CommentsController < ApplicationController
           @post.update_attributes(last_comment_at: @comment.created_at, last_comment_id: @comment.id)
           redirect_to @post
           flash[:success] = "Successfully!"
+          unless @post.member.id == current_member.id
+            content = @current_member.name + " has commented on your post"
+            Notification.create(
+              post_id: @post.id,
+              content: content,
+              status: "haven't seen"
+            )
+          end
         else
           redirect_to @post
           flash[:danger] = "Something error"

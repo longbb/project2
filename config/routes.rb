@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :comments, only: [:create]
   resources :topics, only: [:index, :show]
+  resources :notifications, only: [:index]
 
   root "topics#index"
 end
