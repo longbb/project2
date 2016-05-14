@@ -16,3 +16,8 @@
 //= require_tree .
 //= require bootstrap
 //= require tinymce
+
+$(document).on('ready page:load', function () {
+   tinymce.remove();
+   tinymce.init({selector:'textarea'});
+});
