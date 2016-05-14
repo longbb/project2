@@ -2,13 +2,7 @@ class NotificationsController < ApplicationController
   before_action :must_logged_in, only: [:index]
 
   def index
-    @posts = current_member.posts
-    @notifications = []
-    @posts.each do |post|
-      post.notifications.each do |notification|
-        @notifications.push(notification) if notification.status = "haven't seen"
-      end
-    end
+    @notifications = member_notification
   end
 
   private

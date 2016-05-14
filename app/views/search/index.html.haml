@@ -1,0 +1,62 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h1
+        %center
+          Results for keyword
+          = @keyword
+    .panel-body
+      - if @posts.length == 0
+        %h3
+          There isn't any results for keyword
+          = @keyword
+      - else
+        .table-responsive
+        %table.table.table-striped.table-hover
+          %thead
+            %th
+            %th
+              %center
+                Threads / Posts
+            %th
+              %center
+                Comments
+            %th
+              %center
+                Last Activity
+          %tbody
+            - @posts.each do |post|
+              %tr
+                %td{ width: "10%" }
+                  - if post.status == "closed"
+                    %img{ src: asset_path("close.png"), width: "50px", height: "50px" }
+                  - else
+                    %img{ src: asset_path("open.png"), width: "50px", height: "50px" }
+                %td{ width: "50%"}
+                  .content
+                    %p
+                      = link_to post.title, post_path(post.id)
+                    = "by "
+                    = link_to post.member.name, member_path(post.member.id)
+                    = " at "
+                    = post.created_at
+                %td{ width: "10%"}
+                  Comments: 
+                  = post.comments.length
+                  %br
+                  Views:
+                  = post.number_views
+                  %br
+                  Status: 
+                  = post.status
+                %td{ width: "30%" }
+                  - if post.last_comment_id.present?
+                    - last_comment = Comment.find_by(id: post.last_comment_id)
+                    - if last_comment.present?
+                      = link_to last_comment.member.name, member_path(last_comment.member.id)
+                      %br
+                      = post.last_comment_at
+                  - else
+                    = link_to post.member.name, member_path(post.member.id)
+                    %br
+                    = post.last_comment_at

@@ -16,6 +16,14 @@ class PostsController < ApplicationController
     if @post.present?
       @comments = @post.comments.paginate(page: params[:page])
       @post.update_attribute(:number_views, @post.number_views+1)
+      if current_member.id == @post.member.id
+        notifications_post = Notification.where(post_id: @post.id, status: "haven't seen")
+        unless notifications_post.empty?
+          notifications_post.each do |notification|
+            notification.update_attribute(:status, "seen")
+          end
+        end
+      end
     else
       redirect_to root_path
       flash[:danger] = "The post doesn't exist"

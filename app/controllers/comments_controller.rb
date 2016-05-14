@@ -15,12 +15,13 @@ class CommentsController < ApplicationController
           redirect_to @post
           flash[:success] = "Successfully!"
           unless @post.member.id == current_member.id
-            content = @current_member.name + " has commented on your post"
             Notification.create(
               post_id: @post.id,
-              content: content,
-              status: "haven't seen"
+              content: "has commented on your post",
+              status: "haven't seen",
+              commentator_id: current_member.id
             )
+            @post.member.update_attribute(:notification, "yes")
           end
         else
           redirect_to @post

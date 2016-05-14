@@ -2,10 +2,14 @@
   .container
     .nav
       %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Home", '#'
-        %li= link_to "Help", '#'
+        %li= link_to "Home", root_path
         - if logged_in?
           %li= link_to "Members", '#'
+          - @notifications = member_notification
+          - unless @notifications.empty?
+            %li
+              %a{ href: notifications_path }
+                %img{ src: asset_path("notification.png"), alt: "You have some notifications", width: "20px", height: "20px" }
           %li.dropdown.presentation
             %a#statistics.dropdown-toggle{ "aria-expanded": "false",
               "aria-haspopup": "true", "data-toggle": "dropdown",
@@ -14,9 +18,9 @@
               %span.caret
             %ul.dropdown-menu{ "aria-labelledby": "accounts" }
               %li
-                %a{ href: "#" } Profile
+                %a{ href: member_path(current_member.id) } Profile
               %li
-                %a{ href: "#" } Settings
+                %a{ href: edit_member_path(current_member.id) } Settings
               %li.divider
               %li
                 = link_to "Log out", logout_path, method: "delete"
