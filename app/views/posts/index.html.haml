@@ -6,15 +6,20 @@
           = @member.name + "'s Posts"
     = will_paginate @posts
     .panel-body
-      .table-responsive
-      %table.table.table-striped.table-hover
-        %thead
-          %th Title
-        %tbody
-          - @posts.each do |post|
-            %tr
-              %td
-                = link_to post.title, post_path(post.id)
-              %td{ width: 120 }
-                = link_to "Edit", edit_post_path(post.id), method: :get, class: "btn btn-success"
-    = will_paginate @posts
+      - if @posts.length == 0
+        %h2
+          You don't have any post. Create 
+          = link_to "new post", new_post_path
+      - else
+        .table-responsive
+        %table.table.table-striped.table-hover
+          %thead
+            %th Title
+          %tbody
+            - @posts.each do |post|
+              %tr
+                %td
+                  = link_to post.title, post_path(post.id)
+                %td{ width: 120 }
+                  = link_to "Edit", edit_post_path(post.id), method: :get, class: "btn btn-success"
+      = will_paginate @posts

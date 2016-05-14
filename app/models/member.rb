@@ -11,4 +11,8 @@ class Member < ActiveRecord::Base
         uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  def is_active?
+    self.status == "active"
+  end
 end

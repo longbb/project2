@@ -5,9 +5,14 @@ class SessionsController < ApplicationController
   def create
     member = Member.find_by(email: params[:session][:email].downcase)
     if member && member.authenticate(params[:session][:password])
-      log_in member
-      redirect_to root_path
-      flash[:success] = "Login successfully!"
+      if member.status == "active"
+        log_in member
+        redirect_to root_path
+        flash[:success] = "Login successfully!"
+      else
+        flash[:danger] = "Your account was blocked!"
+        render "new"
+      end
     else
       flash[:danger] = "Invalid email/password combination"
       render "new"
@@ -17,7 +22,7 @@ class SessionsController < ApplicationController
   def destroy
     if logged_in?
       logout
-      redirect_to root_path
+      redirect_to login_path
       flash[:success] = "Logout successfully!"
     end
   end
