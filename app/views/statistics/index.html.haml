@@ -1,0 +1,56 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %center
+        %h1 Statistics
+    .panel-body
+      .col-md-3
+        .panel.panel-primary
+          .panel-heading
+            %h4 New Members Today
+          .panel-body
+            %table
+              %tr
+                %td{ width: 120 }
+                  %img{ src: asset_path("member_icon.jpg"), width: "70px", height: "70px" }
+                %td
+                  %h1
+                    = @number_members_today
+        .panel.panel-danger
+          .panel-heading
+            %h4 New Posts Today
+          .panel-body
+            %table
+              %tr
+                %td{ width: 120 }
+                  %img{ src: asset_path("post_icon.png"), width: "70px", height: "70px" }
+                %td
+                  %h1
+                    = @number_posts_today
+        .panel.panel-success
+          .panel-heading
+            %h4 New Comments Today
+          .panel-body
+            %table
+              %tr
+                %td{ width: 120 }
+                  %img{ src: asset_path("comment_icon.png"), width: "70px", height: "70px" }
+                %td
+                  %h1
+                    = @number_comments_today
+      .col-md-6
+        = bar_chart @number_members, @options
+        %center
+          %h2 Statistic number of new members in this week
+      .col-md-3
+        = bar_chart @number_posts, @options
+        %center
+          %h4 Statistic number of new posts in this week
+        = bar_chart @number_comments, @options
+        %center
+          %h4 Statistic number of new comments in this week
+    .container
+      %center
+        = pie_chart @number_posts_of_topic
+        %h2
+          Statistic number of each topic's posts

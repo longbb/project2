@@ -16,6 +16,8 @@
 //= require_tree .
 //= require bootstrap
 //= require tinymce
+//= require Chart
+//= require excanvas
 
 $(document).on('ready page:load', function () {
    tinymce.remove();

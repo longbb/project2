@@ -6,6 +6,7 @@
         - if logged_in?
           - if current_member.role == "admin"
             %li= link_to "Members", members_path
+            %li= link_to "Statistics", statistics_path
           %li= link_to "My posts", member_posts_path(current_member.id)
           - @notifications = member_notification
           - unless @notifications.empty?

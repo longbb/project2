@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
   resources :topics, only: [:index, :show]
   resources :notifications, only: [:index]
+  resources :statistics, only: [:index]
 
   root "topics#index"
   get "search" => "search#index"

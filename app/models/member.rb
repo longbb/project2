@@ -15,4 +15,21 @@ class Member < ActiveRecord::Base
   def is_active?
     self.status == "active"
   end
+
+  class << self
+    def statistic_member start_date, end_date
+      statistic_member = {
+        number_member: Array.new,
+        date: Array.new
+      }
+      (start_date..end_date).each do |date|
+        number_member = Member.where(
+          created_at: date.beginning_of_day..date.end_of_day
+        ).count
+        statistic_member[:number_member].push number_member
+        statistic_member[:date].push date.to_s
+      end
+      statistic_member
+    end
+  end
 end

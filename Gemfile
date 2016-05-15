@@ -8,6 +8,8 @@ gem 'bcrypt',               '3.1.7'
 gem 'will_paginate', '~> 3.1.0'
 gem 'tinymce-rails'
 gem "paperclip", "~> 5.0.0.beta1"
+gem "chart-js-rails"
+gem "chartjs-ror"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
