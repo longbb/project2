@@ -12,14 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 //= require bootstrap
 //= require tinymce
 //= require Chart
 //= require excanvas
 
-$(document).on('ready page:load', function () {
-   tinymce.remove();
-   tinymce.init({selector:'textarea'});
-});
+// $(document).on('ready page:load', function () {
+//    tinymce.remove();
+//    tinyMCE.init({
+//     selector: "textarea.tinymce",
+//     toolbar: ["styleselect | undo redo | bold italic underline | bullist | outdent indent"],
+//     menubar: false,
+//     statusbar: false,
+//     style_formats: [{"title":"Headers","items":[{"title":"Header 1","format":"h1"},{"title":"Header 2","format":"h2"},{"title":"Header 3","format":"h3"}]},{"title":"Inline","items":[{"title":"Bold","icon":"bold","format":"bold"},{"title":"Italic","icon":"italic","format":"italic"},{"title":"Underline","icon":"underline","format":"underline"},{"title":"Code","icon":"code","format":"code"}]}],
+//     content_css: "/assets/tinymce.css"
+//   });
+// });
