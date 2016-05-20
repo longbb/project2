@@ -1,6 +1,10 @@
 %header.navbar.navbar-fixed-top.navbar-inverse
   .container
     .nav
+      = link_to "forum", root_path, id: "logo"
+      %a{ href: root_path }
+        %img.img-circle{ src: asset_path("logo.png"), width: "5%" }
+      = link_to "it", root_path, id: "logo"
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Home", root_path
         - if logged_in?
@@ -30,3 +34,4 @@
         - else
           %li= link_to "Log in", login_path
           %li= link_to "Sign up", new_member_path
+.header

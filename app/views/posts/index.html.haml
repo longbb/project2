@@ -4,7 +4,8 @@
       -if @member.present?
         %h1
           = @member.name + "'s Posts"
-    = will_paginate @posts
+    %center
+      = will_paginate @posts
     .panel-body
       - if @posts.length == 0
         %h2
@@ -22,4 +23,5 @@
                   = link_to post.title, post_path(post.id)
                 %td{ width: 120 }
                   = link_to "Edit", edit_post_path(post.id), method: :get, class: "btn btn-success"
-      = will_paginate @posts
+      %center
+        = will_paginate @posts

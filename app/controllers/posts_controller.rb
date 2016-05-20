@@ -16,11 +16,13 @@ class PostsController < ApplicationController
     if @post.present?
       @comments = @post.comments.paginate(page: params[:page])
       @post.update_attribute(:number_views, @post.number_views+1)
-      if current_member.id == @post.member.id
-        notifications_post = Notification.where(post_id: @post.id, status: "haven't seen")
-        unless notifications_post.empty?
-          notifications_post.each do |notification|
-            notification.update_attribute(:status, "seen")
+      if current_member.present?
+        if current_member.id == @post.member.id
+          notifications_post = Notification.where(post_id: @post.id, status: "haven't seen")
+          unless notifications_post.empty?
+            notifications_post.each do |notification|
+              notification.update_attribute(:status, "seen")
+            end
           end
         end
       end
@@ -45,6 +47,7 @@ class PostsController < ApplicationController
       @post.update_attribute(:last_comment_at, @post.created_at)
       flash[:success] = "Success"
     else
+      @topics = Topic.all
       render "new"
     end
   end
@@ -70,8 +73,7 @@ class PostsController < ApplicationController
           redirect_to @post
           flash[:success] = "Edit successfully"
         else
-          redirect_to @post
-          flash[:danger] = "Some thing error!"
+          render "edit"
         end
       else
         redirect_to @post

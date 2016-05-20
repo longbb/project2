@@ -3,7 +3,8 @@
     .panel-heading
       %h1
         All members
-    = will_paginate
+    %center
+      = will_paginate
     .panel-body
       .table-responsive
       %table.table.table-striped.table-hover
@@ -32,4 +33,5 @@
                   = link_to "Delete", member, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
                 - else
                   = link_to "Active", member, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-success"
-    = will_paginate
+    %center
+      = will_paginate

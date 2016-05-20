@@ -63,4 +63,5 @@
                     = link_to post.member.name, member_path(post.member.id)
                     %br
                     = post.last_comment_at
-        = will_paginate @posts
+        %center
+          = will_paginate @posts

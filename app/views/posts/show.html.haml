@@ -29,6 +29,9 @@
               = image_tag @post.member.avatar.url(:thumb)
             %br
             = link_to @post.member.name, @post.member
+            - if @post.member.role == "admin"
+              %span{ style: "color: red" }
+                Admin
         %td
           %h2
             = @post.title
@@ -50,9 +53,14 @@
                     = image_tag comment.member.avatar.url(:thumb)
                   %br
                   = link_to comment.member.name, comment.member
+                  - if comment.member.role == "admin"
+                    %br
+                    %span{ style: "color: red" }
+                      = "Admin"
               %td
                 = comment.content.html_safe
-    = will_paginate @comments
+    %center
+      = will_paginate @comments
   - if @post.status == "open" && current_member.present?
     = form_tag({ controller: "comments", action: "create" }, method: "post") do
       = hidden_field_tag(:post_id, @post.id)

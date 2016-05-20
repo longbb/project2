@@ -46,3 +46,10 @@ Topic.create!(
   name: "Other",
   description: nil
 )
+Member.create(
+  name: "Admin",
+  email: "admin@forum.com",
+  password: "admin123",
+  status: "active",
+  role: "admin"
+)
